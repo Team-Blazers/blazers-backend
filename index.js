@@ -28,7 +28,7 @@ else
     console.log("Db connected successfully")
 
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('Welcome to EasyLearn Backend! Our goal is to make learning accessible to Africans');
 });
 
 app.post('/test', (req, res) => {
