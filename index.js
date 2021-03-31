@@ -5,6 +5,9 @@ var Student = require('./student.js');
 var Teacher = require('./teacher.js');
 let bodyParser = require('body-parser');
 
+var cors = require('cors')
+app.use(cors()) 
+
 mongoose.connect('mongodb+srv://blazerseasylearn:blazerseasylearn@easylearn.hv9w0.mongodb.net/test?retryWrites=true&w=majority', 
 { 
     useNewUrlParser: true,
@@ -30,29 +33,114 @@ app.get('/', (req, res) => {
 
 
 app.post('/createstudent', (req, res) => {
-    var student = new Student({
-        email: req.body.email,
-        name: req.body.name,
-        surname: req.body.name
-    });
-    student.save(function(err, student){
-        if(err) return err;
-        res.send(student); 
+    
+
+    Student.findOne({
+        email: req.body.email
+    }).exec((err, student) => {
+
+        if (err) {
+            res.status(500).send({ message: err });
+            return;
+        }
+
+        if (student) {
+            res.send(401);
+            return;
+          }
+
+        if (!student) {
+            var student = new Student({
+                email: req.body.email,
+                name: req.body.name,
+                surname: req.body.name
+            });
+
+            student.save(function(err, student){
+                if(err) return err;
+                res.send(200); 
+            });
+
+        }
     });
     
 });
 
 app.post('/createteacher', (req, res) => {
-    var teacher = new Teacher({
-        email: req.body.email,
-        name: req.body.name,
-        surname: req.body.name
-    });
-    teacher.save(function(err, student){
-        if(err) return err;
-        res.send(teacher); 
+    
+    Teacher.findOne({
+        email: req.body.email
+    }).exec((err, teacher) => {
+
+        if (err) {
+            res.status(500).send({ message: err });
+            return;
+        }
+
+        if (teacher) {
+            res.send(401);
+            return;
+          }
+
+        if (!teacher) {
+            var teacher = new Teacher({
+                email: req.body.email,
+                name: req.body.name,
+                surname: req.body.name
+            });
+            teacher.save(function(err){
+                if(err) return err;
+                res.send(200); 
+            });
+        }
+
     });
     
+    
+});
+
+app.post('/loginstudent', (req, res) => {
+    Student.findOne({
+        email: req.body.email
+    }).exec((err, student) => {
+
+        if (err) {
+            res.status(500).send({ message: err });
+            return;
+        }
+
+        if (student) {
+            res.send(200);
+            return;
+          }
+
+        if (!student) {
+            res.send(401);
+            return;
+        }
+    });
+});
+
+app.post('/loginteacher', (req, res) => {
+    Teacher.findOne({
+        email: req.body.email
+    }).exec((err, teacher) => {
+
+        if (err) {
+            res.status(500).send({ message: err });
+            return;
+        }
+
+        if (teacher) {
+            res.send(200);
+            return;
+          }
+
+        if (!teacher) {
+            res.send(401);
+            return;
+        }
+    });
 });
 //port environment variable if it is set or 3000
 const port = process.env.PORT || 3000

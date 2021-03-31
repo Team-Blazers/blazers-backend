@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var userSchema = mongoose.Schema({
+var studentSchema = mongoose.Schema({
     email: {
         type: String
     },
@@ -14,7 +14,7 @@ var userSchema = mongoose.Schema({
 });
 
 // Export model
-var User = module.exports = mongoose.model('user', userSchema);
+var Student = module.exports = mongoose.model('student', studentSchema);
 module.exports.get = function (callback, limit) {
-    User.find(callback).limit(limit);
+    Student.find(callback).limit(limit);
 }
