@@ -4,7 +4,7 @@
     "description": "A web application that makes learning accessible to africans",
     "main": "index.js",
     "scripts": {
-        "start": "index.js"
+        "start": "node index.js"
     },
     "author": "Team Blazers",
     "license": "MIT",
