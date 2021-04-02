@@ -1,2 +1,2 @@
 # blazers-backend
-Backend code for the web application
+Easylearn is an interractive online learning web application that allows learners access content and also expand their craetivity by uploading videosof newskills learned to sharewith their peers.Easylearn provides a wide range of quality content from teachers tailored towards the needsof learners of all categories. Learners can also log into the application and attend their classesin an efficiernt way.  Easy learn lays the perfect communicative foundations between teachers and learners during distance learning hence promoting lifelong learning for all.
